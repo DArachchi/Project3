@@ -20,55 +20,27 @@ app.use(express.static("./public"));
 
 // -------------------------------------------------
 
-// Route to get all saved articles
-app.get("/api/saved", function(req, res) {
-
-  Article.find({})
-    .exec(function(err, doc) {
-
-      if (err) {
-        console.log(err);
-      }
-      else {
-        res.send(doc);
-      }
-    });
+// GET Route to get all vehicles
+app.get("/api/vehicles", function(req, res) {
+	db.vehicle.findAll({}).then(function(dbVehicle) {
+		res.json(dbVehicle);
+	});
 });
 
-// Route to add an article to saved list
-app.post("/api/saved", function(req, res) {
-  var newArticle = new Article(req.body);
-
-  console.log(req.body);
-
-  newArticle.save(function(err, doc) {
-    if (err) {
-      console.log(err);
-    }
-    else {
-      res.send(doc);
-    }
-  });
-});
-
-// Route to delete an article from saved list
-app.delete("/api/saved/", function(req, res) {
-
-  var url = req.param("url");
-
-  Article.find({ url: url }).remove().exec(function(err) {
-    if (err) {
-      console.log(err);
-    }
-    else {
-      res.send("Deleted");
-    }
-  });
+// GET Route to show specific vehicle
+app.get("/api/vehicles/:vehicleid", function(req, res) {
+	db.vehicle.findAll({
+		where: {
+			id: req.params.vehicleid
+		}
+	}).then(function(dbVehicleInfo) {
+		res.json(dbVehicleInfo);
+	});
 });
 
 // Any non API GET routes will be directed to our React App and handled by React Router
 app.get("*", function(req, res) {
-  res.sendFile(__dirname + "/public/index.html");
+	res.sendFile(__dirname + "/public/index.html");
 });
 
 
