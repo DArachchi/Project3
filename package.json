@@ -6,10 +6,12 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
+    "material-ui": "^0.17.4",
     "mysql": "^2.13.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.4.1",
+    "react-tap-event-plugin": "^2.0.1",
     "sequelize": "^3.30.4"
   },
   "devDependencies": {
