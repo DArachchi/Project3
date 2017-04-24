@@ -6,11 +6,13 @@ const makes = [
 	'Audi',
 	'BMW',
 	'Ferrari',
+	'Ford',
 	'Honda',
 	'Lamborghini',
 	'Lotus',
 	'Mazda',
-	'Mercedes-Benz'
+	'Mercedes-Benz',
+	'Toyota'
 ];
 
 /**
