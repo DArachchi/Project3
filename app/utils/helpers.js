@@ -3,7 +3,14 @@ var axios = require("axios");
 
 // Helper Functions
 var helpers = {
-  
+  // This will return any saved articles from our database
+  getVehicles: function() {
+    return axios.get("/api/vehicles")
+      .then(function(results) {
+        console.log("axios results", results);
+        return results;
+      });
+  },
 };
 
 

@@ -19,6 +19,7 @@ var browserHistory = router.browserHistory;
 // Reference the high-level components
 var Main = require("../components/Main").default;
 var Search = require("../components/Search").default;
+var Results = require("../components/Results").default;
 
 
 // Export the Routes
@@ -30,7 +31,7 @@ module.exports = (
 			{/* If user selects Search or Saved show the appropriate component 
 			*/}
 			<Route path="Search" component={Search} />
-			*/}
+			<Route path="Results" component={Results} />
 			{/* If user selects any other path... we get the Home Route 
 			*/}
 			<IndexRoute component={Search} />
