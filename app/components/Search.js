@@ -7,15 +7,9 @@ import AutoComplete from 'material-ui/AutoComplete';
 
 const makes = [
 	'Audi',
-	'BMW',
-	'Ferrari',
-	'Ford',
 	'Honda',
-	'Lamborghini',
 	'Lotus',
-	'Mazda',
-	'Mercedes-Benz',
-	'Toyota'
+	'Mazda'
 ];
 
 const styles = {
@@ -38,12 +32,8 @@ class Search extends Component {
 				<div className="jumbotron" style={styles.jumbotron}>
 					<h1 className="text-center"><strong>Star Car Finder</strong></h1>
 					<h2 className="text-center">Search for a Vehicle for Your Next Film</h2>
-							<div style={styles.center}>
-								<RaisedButton label="Sign Up" style={styles.button} primary={true} />
-								<RaisedButton label="Login" style={styles.button} primary={true} />
-							</div>
-					<AutoComplete
-						floatingLabelText="Search Car Makes"
+					<AutoComplete style={styles.center}
+						floatingLabelText="Search Vehicle Makes"
 						filter={AutoComplete.fuzzyFilter}
 						dataSource={makes}
 						maxSearchResults={5}

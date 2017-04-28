@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Paper from 'material-ui/Paper';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import helpers from '../utils/helpers';
 
@@ -7,6 +8,7 @@ const styles = {
 		backgroundColor: '#1A237E'
 	},
 	panelTitle: {
+		color: '#FFFFFF',
 		fontSize: '20pt'
 	},
 	tableHeader: {
@@ -57,18 +59,18 @@ class Results extends Component {
 			<div className="main-container">
 				<div className="row">
 					<div className="col-lg-12">
-						<div className="panel panel-primary">
-							<div className="panel-heading">
-								<h1 className="panel-title">
+						<Paper zDepth={2}>
+							<div className="panel-heading" style={styles.panelHeader}>
+								<h1 className="panel-title" style={styles.panelTitle}>
 									<strong>
-										<i className="fa fa-list"></i>Search Results
+										<i className="fa fa-list"></i>         Search Results
 									</strong>
 								</h1>
 							</div>
 							<div className="panel-body">
 								No Results Found
 							</div>
-						</div>
+						</Paper>
 					</div>
 				</div>
 			</div>
@@ -80,7 +82,7 @@ class Results extends Component {
 			<div className="main-container">
 				<div className="row">
 					<div className="col-lg-12">
-						<div className="panel panel-primary">
+						<Paper zDepth={2}>
 							<div className="panel-heading" style={styles.panelHeader}>
 								<h1 className="panel-title" style={styles.panelTitle}>
 									<strong>
@@ -103,7 +105,7 @@ class Results extends Component {
 									</TableBody>
 								</Table>
 							</div>
-						</div>
+						</Paper>
 					</div>
 				</div>
 			</div>

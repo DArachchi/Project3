@@ -40,18 +40,14 @@ app.get("/api/vehicles/:vehicleid", function(req, res) {
 
 // Route to add a new vehicle
 app.post("/api/vehicles", function(req, res) {
-  var newVehicle = new Vehicle(req.body);
-
-  console.log(req.body);
-
-  newVehicle.save(function(err, doc) {
-    if (err) {
-      console.log(err);
-    }
-    else {
-      res.send(doc);
-    }
-  });
+	db.vehicle.create({
+		make: req.body.make,
+		model: req.body.model,
+		year: req.body.year,
+		color: req.body.color
+	}).then(function(dbVehicleInfo) {
+		res.json(dbVehicleInfo);
+	})
 });
 
 // Any non API GET routes will be directed to our React App and handled by React Router
