@@ -1,5 +1,6 @@
 // Include React as a dependency
-import React, {Component} from 'react';
+import React, {Component, PropTypes as T } from 'react';
+import Login from './Login';
 import {amber700, deepOrangeA400, indigo900, lightBlueA400} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -10,6 +11,7 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import FlatButton from 'material-ui/FlatButton';
+import { Jumbotron } from 'react-bootstrap';
 
 // Including the Link component from React Router to navigate within our application without full page reloads
 var Link = require("react-router").Link;
@@ -19,9 +21,6 @@ function openNaviDrawer() {
 }
 
 const styles = {
-	background: {
-		backgroundColor: '#4A525A'
-	},
 	center: {
 		textAlign: 'center'
 	},
@@ -29,6 +28,9 @@ const styles = {
 		marginLeft: '50px',
 		marginTop: '20px',
 		width: '150px'
+	},
+	navibar: {
+		position: 'fixed'
 	},
   title: {
     cursor: 'pointer',
@@ -44,6 +46,11 @@ const muiTheme = getMuiTheme({
 
 // Create the Main component
 class Main extends Component {
+
+	static contextTypes = {
+		router: T.object
+	};
+
 	// Constructor and states for Navi Drawer
 	constructor(props) {
 		super(props);
@@ -60,21 +67,31 @@ class Main extends Component {
 	};
 
 	render() {
+		let children = null;
+		if (this.props.children) {
+			children = React.cloneElement(this.props.children, {
+				auth: this.props.route.auth //sends auth instance to children
+			})
+		}
+
 		return (
 			// Main container includes material-ui theme
 			<MuiThemeProvider muiTheme={muiTheme}>
-				<div className="main-container" style={styles.background}>
-					<AppBar title={<span style={styles.title}>Star Car Finder</span>} onLeftIconButtonTouchTap={this.handleToggle} iconElementRight={<FlatButton label="About Us" />} />
+				<div className="main-container">
+					<AppBar title={<span style={styles.title}>Star Car Finder</span>} style={styles.navibar} onLeftIconButtonTouchTap={this.handleToggle} iconElementRight={<FlatButton label="About Us" />} />
 					<Drawer docked={false} width={300} open={this.state.open} onRequestChange={(open) => this.setState({open})}>
-						<AppBar title="Star Car Finder" iconElementLeft={<IconButton><NavigationClose /></IconButton>} onTouchTap={this.handleClose} />
+						<AppBar title="Star Car Finder" style={styles.navibar} iconElementLeft={<IconButton onTouchTap={this.handleClose}><NavigationClose /></IconButton>}> </AppBar>
 						<MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Sign In</MenuItem>
-						<MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Log In</MenuItem>
+						<MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Register</MenuItem>
+						<Link to="/Results"><MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Show All Vehicles</MenuItem></Link>
 					</Drawer>
 
 					<div className="container">
 						{/* Here we will deploy the sub components (Search or Saved */}
 						{/* These sub-components are getting passed as this.props.children */}
 						{this.props.children}
+
+
 
 						<footer>
 							<hr />
