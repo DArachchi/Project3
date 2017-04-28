@@ -34,7 +34,11 @@ app.get("/api/vehicles/:vehicleid", function(req, res) {
 			id: req.params.vehicleid
 		}
 	}).then(function(dbVehicleInfo) {
-		res.json(dbVehicleInfo);
+		if(err) {
+			console.log("This is the error!!!  " + err)
+		} else {
+			res.json(dbVehicleInfo);
+		}
 	});
 });
 

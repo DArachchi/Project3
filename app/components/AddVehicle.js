@@ -5,6 +5,9 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import helpers from '../utils/helpers';
 
 const styles = {
@@ -33,11 +36,16 @@ class AddVehicle extends Component {
 			make: '',
 			model: '',
 			year: '',
-			color: ''
+			color: '',
+			dialogOpen: false
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
+
+	handleDialogClose = () => {
+		this.setState({dialogOpen: false});
+	};
 
 	handleChange(event) {
 		const value = event.target.value;
@@ -48,18 +56,43 @@ class AddVehicle extends Component {
 		});
 	}
 
-	handleSubmit(event) {
+	handleConfirm = () => {
 		helpers.addVehicle(this.state.make, this.state.model, this.state.year, this.state.color).then(function(vehicleData) {
 			console.log(vehicleData);
 		}.bind(this));
+		this.handleDialogClose();
+	}
 
-		alert('A name was submitted: ' + this.state.make + this.state.model);
+	handleSubmit(event) {
 		event.preventDefault();
+		if(this.state.make && this.state.model && this.state.year && this.state.color) {
+			this.setState({dialogOpen: true});
+		}
 	}
 
 	render() {
+		const dialogActions = [
+			<FlatButton
+			label="Cancel"
+			primary={true}
+			onTouchTap={this.handleDialogClose}
+			/>,
+			<FlatButton
+			label="Confirm"
+			primary={true}
+			onTouchTap={this.handleConfirm}
+			/>,
+		];
+
 		return(
 			<div className="main-container">
+				<div>
+					<Dialog title="Add New Vehicle" actions={dialogActions} modal={true} open={this.state.dialogOpen}>
+						Are you sure you want to add a<br/><br/>
+						{this.state.color} {this.state.year} {this.state.make} {this.state.model}<br/><br/>
+						to the database? 
+					</Dialog>
+				</div>
 				<div className="row">
 					<div className="col-lg-12">
 						<Paper zDepth={2}>

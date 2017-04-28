@@ -15,8 +15,8 @@ const helpers = {
     var newVehicle = { make: make, model: model, year: year, color: color};
     return axios.post("/api/vehicles", newVehicle)
       .then(function(response) {
-        console.log("axios results", response.data._id);
-        return response.data._id;
+        console.log("axios results", response.data);
+        return response.data;
       });
   },
 };
