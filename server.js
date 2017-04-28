@@ -28,17 +28,25 @@ app.get("/api/vehicles", function(req, res) {
 });
 
 // GET Route to show specific vehicle
-app.get("/api/vehicles/:vehicleid", function(req, res) {
+app.get("/api/id/:vehicleid", function(req, res) {
 	db.vehicle.findAll({
 		where: {
 			id: req.params.vehicleid
 		}
 	}).then(function(dbVehicleInfo) {
-		if(err) {
-			console.log("This is the error!!!  " + err)
-		} else {
-			res.json(dbVehicleInfo);
+		res.json(dbVehicleInfo);
+	});
+});
+
+// GET Route to show vehicles by make
+app.get("/api/make/:make", function(req, res) {
+	db.vehicle.findAll({
+		where: {
+			make: req.params.make
 		}
+	}).then(function(dbVehicleInfo) {
+		res.json(dbVehicleInfo);
+
 	});
 });
 

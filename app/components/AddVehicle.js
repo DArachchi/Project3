@@ -67,6 +67,8 @@ class AddVehicle extends Component {
 		event.preventDefault();
 		if(this.state.make && this.state.model && this.state.year && this.state.color) {
 			this.setState({dialogOpen: true});
+		} else {
+			/* Need code to show that required fields have not been filled out */
 		}
 	}
 
