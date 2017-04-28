@@ -1,41 +1,58 @@
 import React, {Component} from 'react';
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import helpers from '../utils/helpers';
 
+const styles = {
+	panelHeader: {
+		backgroundColor: '#1A237E'
+	},
+	panelTitle: {
+		fontSize: '20pt'
+	},
+	tableHeader: {
+		color: '#607D8B',
+		fontSize: '16pt'
+	},
+	tableContent: {
+		color: '#1A237E',
+		fontSize: '14pt'
+	}
+}
+
 class Results extends Component {
-	getInitialState() {
-		return {
-			results: "",
-			vehicles: "",
-			vehicleMake: ""
+	// Clearing and setting initial state
+	constructor(props) {
+		super(props);
+		this.state = {
+			vehicles: ""
 		};
 	}
 
 	// When this component mounts, get all vehicles from database
 	componentDidMount() {
-		helpers.getVehicles().then(function(vehicleData) {
-			this.setState({ vehicles: vehicleData.data });
-			console.log("vehicle search results", vehicleData.data);
-		}.bind(this));
+		console.log(this.props.searchCriteria);
+		if(!this.props.searchCriteria){
+			helpers.getVehicles().then(function(vehicleData) {
+				this.setState({ vehicles: vehicleData.data });
+			}.bind(this));
+		}
 	}
 
 	renderVehicles() {
-		return this.props.results.docs.map(function(article, index) {
-
-			// Each article thus reperesents a list group item with a known index
+		console.log(this.state)
+		return this.state.vehicles.map(function(vehicle, index) {
 			return (
-				<div key={index}>
-					<li className="list-group-item">
-
-					</li>
-				</div>
+				<TableRow key={index}>
+					<TableRowColumn style={styles.tableContent}>{vehicle.year}</TableRowColumn>
+					<TableRowColumn style={styles.tableContent}>{vehicle.make}</TableRowColumn>
+					<TableRowColumn style={styles.tableContent}>{vehicle.model}</TableRowColumn>
+					<TableRowColumn style={styles.tableContent}>{vehicle.color}</TableRowColumn>
+				</TableRow>
 			);
-
 		}.bind(this));
-
 	}
 
-	// Helper method to render a container to hold search results
-	renderContainer() {
+	renderEmpty() {
 		return (
 			<div className="main-container">
 				<div className="row">
@@ -44,15 +61,47 @@ class Results extends Component {
 							<div className="panel-heading">
 								<h1 className="panel-title">
 									<strong>
-										<i className="fa fa-list-alt"></i>
-										Results
+										<i className="fa fa-list"></i>Search Results
 									</strong>
 								</h1>
 							</div>
 							<div className="panel-body">
-								<ul className="list-group">
-									{this.renderVehicles()}
-								</ul>
+								No Results Found
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		)
+	}
+	// Helper method to render a container to hold search results
+	renderContainer() {
+		return (
+			<div className="main-container">
+				<div className="row">
+					<div className="col-lg-12">
+						<div className="panel panel-primary">
+							<div className="panel-heading" style={styles.panelHeader}>
+								<h1 className="panel-title" style={styles.panelTitle}>
+									<strong>
+										<i className="fa fa-list"></i>         Search Results
+									</strong>
+								</h1>
+							</div>
+							<div className="panel-body">
+								<Table>
+									<TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+										<TableRow >
+											<TableHeaderColumn style={styles.tableHeader}>Year</TableHeaderColumn>
+											<TableHeaderColumn style={styles.tableHeader}>Make</TableHeaderColumn>
+											<TableHeaderColumn style={styles.tableHeader}>Model</TableHeaderColumn>
+											<TableHeaderColumn style={styles.tableHeader}>Color</TableHeaderColumn>
+										</TableRow>
+									</TableHeader>
+									<TableBody displayRowCheckbox={false} showRowHover={true} stripedRows={true}>
+										{this.renderVehicles()}
+									</TableBody>
+								</Table>
 							</div>
 						</div>
 					</div>
@@ -62,22 +111,10 @@ class Results extends Component {
 	}
 
 	render() {
-/*		return(
-			// If we have no articles, render this HTML
-			if (!this.props.results.docs) {
-				return (
-					<li className="list-group-item">
-						<h3>
-								Hi
-						</h3>
-					</li>
-				);
-			}
-			*/
-			// If we have articles, return this.renderContainer() which in turn, returns all the articles
-			return(
-				this.renderContainer()
-			)
+		if(!this.state.vehicles) {
+			return this.renderEmpty();
+		}
+		return this.renderContainer();
 	}
 };
 

@@ -16,13 +16,12 @@ import { Jumbotron } from 'react-bootstrap';
 // Including the Link component from React Router to navigate within our application without full page reloads
 var Link = require("react-router").Link;
 
-function openNaviDrawer() {
-  alert('onTouchTap triggered on the title component');
-}
-
 const styles = {
 	center: {
 		textAlign: 'center'
+	},
+	contentBox: {
+		marginTop: '100px'
 	},
 	drawerItem: {
 		marginLeft: '50px',
@@ -54,16 +53,23 @@ class Main extends Component {
 	// Constructor and states for Navi Drawer
 	constructor(props) {
 		super(props);
-		this.state = {open: false};
+		this.state = {
+			searchCriteria: {
+				make: "",
+				model: "",
+				year: ""
+			},
+			drawerOpen: false
+		};
 		this.handleToggle = this.handleToggle.bind(this);
 		this.handleClose = this.handleClose.bind(this);
 	};
 
 	handleToggle() {
-		return (this.setState({open: !this.state.open}));
+		return (this.setState({drawerOpen: !this.state.drawerOpen}));
 	};
 	handleClose() {
-		return(this.setState({open: false}));
+		return(this.setState({drawerOpen: false}));
 	};
 
 	render() {
@@ -79,28 +85,28 @@ class Main extends Component {
 			<MuiThemeProvider muiTheme={muiTheme}>
 				<div className="main-container">
 					<AppBar title={<span style={styles.title}>Star Car Finder</span>} style={styles.navibar} onLeftIconButtonTouchTap={this.handleToggle} iconElementRight={<FlatButton label="About Us" />} />
-					<Drawer docked={false} width={300} open={this.state.open} onRequestChange={(open) => this.setState({open})}>
+					<Drawer docked={false} width={300} open={this.state.drawerOpen} onRequestChange={(open) => this.setState({open})}>
 						<AppBar title="Star Car Finder" style={styles.navibar} iconElementLeft={<IconButton onTouchTap={this.handleClose}><NavigationClose /></IconButton>}> </AppBar>
 						<MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Sign In</MenuItem>
 						<MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Register</MenuItem>
 						<Link to="/Results"><MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Show All Vehicles</MenuItem></Link>
+						<Link to="/Search"><MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Search for a Vehicle</MenuItem></Link>
+						<Link to="/AddVehicle"><MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Add a New Vehicle</MenuItem></Link>
 					</Drawer>
 
 					<div className="container">
-						{/* Here we will deploy the sub components (Search or Saved */}
-						{/* These sub-components are getting passed as this.props.children */}
-						{this.props.children}
+						<div style={styles.contentBox}>
+							{/* Here we will deploy the sub components */}
+							{this.props.children}
 
-
-
-						<footer>
-							<hr />
-							<p className="pull-right">
-								<i className="fa fa-github" aria-hidden="true"></i>
-								Proudly built using React.js
-							</p>
-						</footer>
-
+							<footer>
+								<hr />
+								<p className="pull-right">
+									<i className="fa fa-github" aria-hidden="true"></i>
+									Proudly built using React.js
+								</p>
+							</footer>
+						</div>
 					</div>
 				</div>
 			</MuiThemeProvider>
