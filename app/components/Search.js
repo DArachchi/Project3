@@ -30,10 +30,7 @@ const styles = {
 		color: '#1A237E'
 	}
 }
-/**
- * Two examples of filtering. The first uses `caseInsensitiveFilter`, the second uses `fuzzyFilter`,
- * and limits the number of results displayed using the `maxSearchResults` property.
- */
+
 class Search extends Component {
 	render() {
 		return(
