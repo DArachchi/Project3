@@ -63,7 +63,7 @@ class Results extends Component {
 							<div className="panel-heading" style={styles.panelHeader}>
 								<h1 className="panel-title" style={styles.panelTitle}>
 									<strong>
-										<i className="fa fa-list"></i>         Search Results
+										<i className="fa fa-list"></i>Search Results
 									</strong>
 								</h1>
 							</div>
@@ -76,8 +76,8 @@ class Results extends Component {
 			</div>
 		)
 	}
-	// Helper method to render a container to hold search results
-	renderContainer() {
+	// Renders search results
+	renderResults() {
 		return (
 			<div className="main-container">
 				<div className="row">
@@ -86,7 +86,7 @@ class Results extends Component {
 							<div className="panel-heading" style={styles.panelHeader}>
 								<h1 className="panel-title" style={styles.panelTitle}>
 									<strong>
-										<i className="fa fa-list"></i>         Search Results
+										<i className="fa fa-list"></i>Search Results
 									</strong>
 								</h1>
 							</div>
@@ -116,7 +116,7 @@ class Results extends Component {
 		if(!this.state.vehicles) {
 			return this.renderEmpty();
 		}
-		return this.renderContainer();
+		return this.renderResults();
 	}
 };
 
