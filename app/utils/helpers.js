@@ -10,9 +10,9 @@ const helpers = {
         return results;
       });
   },
-  // This will save new articles to our database
-  addVehicle(make, model, year) {
-    var newVehicle = { make: make, model: model, year: year };
+  // This will save new vehicles to our database
+  addVehicle(make, model, year, color) {
+    var newVehicle = { make: make, model: model, year: year, color: color};
     return axios.post("/api/vehicles", newVehicle)
       .then(function(response) {
         console.log("axios results", response.data._id);
