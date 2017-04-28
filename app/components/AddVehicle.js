@@ -6,25 +6,32 @@ import RaisedButton from 'material-ui/RaisedButton';
 import AutoComplete from 'material-ui/AutoComplete';
 
 const styles = {
-	button: {
-		margin: '50px'
+	panelHeader: {
+		backgroundColor: '#1A237E'
 	},
-	center: {
-		textAlign: 'center'
-	},
-	jumbotron: {
-		backgroundColor: '#FFFFFF',
-		color: '#1A237E'
+	panelTitle: {
+		fontSize: '20pt'
 	}
 }
 
 class AddVehicle extends Component {
 	render() {
 		return(
-			<div>
-				<div className="jumbotron" style={styles.jumbotron}>
-					<h1 className="text-center"><strong>Star Car Finder</strong></h1>
-					<h2 className="text-center">Add a New Vehicle</h2>
+			<div className="main-container">
+				<div className="row">
+					<div className="col-lg-12">
+						<div className="panel panel-primary">
+							<div className="panel-heading" style={styles.panelHeader}>
+								<h1 className="panel-title" style={styles.panelTitle}>
+									<strong>
+										<i className="fa fa-car"></i>Add a New Vehicle
+									</strong>
+								</h1>
+							</div>
+							<div className="panel-body">
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		)

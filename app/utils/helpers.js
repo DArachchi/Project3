@@ -1,17 +1,25 @@
 // Include the Axios library for HTTP requests
-var axios = require("axios");
+import axios from 'axios';
 
 // Helper Functions
-var helpers = {
-  // This will return any saved articles from our database
-  getVehicles: function() {
+const helpers = {
+  // This will return all vehicles from our database
+  getVehicles() {
     return axios.get("/api/vehicles")
       .then(function(results) {
         return results;
       });
   },
+  // This will save new articles to our database
+  addVehicle(make, model, year) {
+    var newVehicle = { make: make, model: model, year: year };
+    return axios.post("/api/vehicles", newVehicle)
+      .then(function(response) {
+        console.log("axios results", response.data._id);
+        return response.data._id;
+      });
+  },
 };
 
 
-// We export the helpers function
-module.exports = helpers;
+export default helpers;

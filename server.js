@@ -38,6 +38,22 @@ app.get("/api/vehicles/:vehicleid", function(req, res) {
 	});
 });
 
+// Route to add a new vehicle
+app.post("/api/vehicles", function(req, res) {
+  var newVehicle = new Vehicle(req.body);
+
+  console.log(req.body);
+
+  newVehicle.save(function(err, doc) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
 // Any non API GET routes will be directed to our React App and handled by React Router
 app.get("*", function(req, res) {
 	res.sendFile(__dirname + "/public/index.html");
