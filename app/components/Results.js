@@ -32,7 +32,6 @@ class Results extends Component {
 
 	// When this component mounts, get all vehicles from database
 	componentDidMount() {
-		console.log(this.props.searchCriteria);
 		if(!this.props.searchCriteria){
 			helpers.getVehicles().then(function(vehicleData) {
 				this.setState({ vehicles: vehicleData.data });

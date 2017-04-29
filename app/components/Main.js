@@ -86,8 +86,8 @@ class Main extends Component {
 					<AppBar title={<Link to='/Home' style={styles.title}>Star Car Finder</Link>} style={styles.navibar} onLeftIconButtonTouchTap={this.handleToggle} iconElementRight={<Link to='/AboutUs'><FlatButton style={styles.title} label="About Us" /></Link>} />
 					<Drawer docked={false} width={300} open={this.state.drawerOpen} onRequestChange={(open) => this.setState({open})}>
 						<AppBar title={<Link to='/Home' style={styles.title} onTouchTap={this.handleClose}>Star Car Finder</Link>} style={styles.navibar} iconElementLeft={<IconButton onTouchTap={this.handleClose}><NavigationClose /></IconButton>}> </AppBar>
-						<MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Sign In</MenuItem>
 						<MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Register</MenuItem>
+						<MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Sign In</MenuItem>
 						<Link to="/Results"><MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Show All Vehicles</MenuItem></Link>
 						<Link to="/Search"><MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Search for a Vehicle</MenuItem></Link>
 						<Link to="/AddVehicle"><MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Add a New Vehicle</MenuItem></Link>

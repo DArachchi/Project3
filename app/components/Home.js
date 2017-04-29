@@ -15,6 +15,9 @@ const styles = {
 	},
 	jumbotron: {
 		color: '#1A237E'
+	},
+	title: {
+		marginBottom: '50px'
 	}
 }
 
@@ -29,7 +32,7 @@ class Home extends Component {
 			<div>
 				<div className="jumbotron" style={styles.jumbotron}>
 					<div className="text-center">
-						<h1><strong>Star Car Finder</strong></h1>
+						<h1 style={styles.title}><strong>Star Car Finder</strong></h1>
 						<Link to='/Search'><RaisedButton style={styles.button} secondary={true}>Search for a Vehicle for Your Next Film</RaisedButton></Link><br/>
 						<h2><strong>Or</strong></h2><br/>
 						<Link to='/AddVehicle'><RaisedButton style={styles.button} secondary={true}>Submit Your Vehicle to Appear in a Film</RaisedButton></Link>
