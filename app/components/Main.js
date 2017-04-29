@@ -39,7 +39,7 @@ const styles = {
 const muiTheme = getMuiTheme({
 	palette: {
 		primary1Color: deepOrangeA400,
-		accent1Color: amber700
+		accent1Color: indigo900
 	}
 });
 

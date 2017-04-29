@@ -7,7 +7,8 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import helpers from '../utils/helpers';
 
 const styles = {
@@ -19,9 +20,7 @@ const styles = {
 		fontSize: '20pt'
 	},
 	submitButton: {
-		backgroundColor: '#1A237E',
-		color: '#FFFFFF',
-		marginLeft: '110px',
+		marginLeft: '20px',
 		marginTop: '20px'
 	},
 	textField: {
@@ -37,7 +36,8 @@ class AddVehicle extends Component {
 			model: '',
 			year: '',
 			color: '',
-			dialogOpen: false
+			dialogOpen: false,
+			submitButtonDisabled: true
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -54,6 +54,11 @@ class AddVehicle extends Component {
 		this.setState({
 			[name]: value
 		});
+		if(this.state.make && this.state.model && this.state.year && this.state.color) {
+			this.setState({submitButtonDisabled: false});
+		} else {
+			this.setState({submitButtonDisabled:true});
+		}
 	}
 
 	handleConfirm = () => {
@@ -65,11 +70,7 @@ class AddVehicle extends Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
-		if(this.state.make && this.state.model && this.state.year && this.state.color) {
-			this.setState({dialogOpen: true});
-		} else {
-			/* Need code to show that required fields have not been filled out */
-		}
+		this.setState({dialogOpen: true});
 	}
 
 	render() {
@@ -106,13 +107,12 @@ class AddVehicle extends Component {
 								</h1>
 							</div>
 							<div className="panel-body">
-								<form onSubmit={this.handleSubmit}>
-										<TextField style={styles.textField} name='make' value={this.state.make} onChange={this.handleChange} floatingLabelText="Enter Vehicle Make"/><br/>
-										<TextField style={styles.textField} name='model' value={this.state.model} onChange={this.handleChange} floatingLabelText="Enter Vehicle Model"/><br/>
-										<TextField style={styles.textField} name='year' value={this.state.year} onChange={this.handleChange} floatingLabelText="Enter Vehicle Year"/><br/>
-										<TextField style={styles.textField} name='color' value={this.state.color} onChange={this.handleChange} floatingLabelText="Enter Vehicle Color"/><br/>
-										<input style={styles.submitButton} type="submit" value="Submit" />
-								</form>
+								<TextField style={styles.textField} name='make' value={this.state.make} onChange={this.handleChange} floatingLabelText="Enter Vehicle Make"/><br/>
+								<TextField style={styles.textField} name='model' value={this.state.model} onChange={this.handleChange} floatingLabelText="Enter Vehicle Model"/><br/>
+								<TextField style={styles.textField} name='year' value={this.state.year} onChange={this.handleChange} floatingLabelText="Enter Vehicle Year"/><br/>
+								<TextField style={styles.textField} name='color' value={this.state.color} onChange={this.handleChange} floatingLabelText="Enter Vehicle Color"/><br/>
+
+								<FloatingActionButton style={styles.submitButton} secondary={true} disabled={this.state.submitButtonDisabled} onTouchTap={this.handleSubmit}><ContentAdd /></FloatingActionButton>
 							</div>
 						</Paper>
 					</div>
