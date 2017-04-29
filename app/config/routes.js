@@ -9,6 +9,7 @@ import AuthService from '../utils/AuthService';
 
 // Reference the high-level components
 import Main from '../components/Main';
+import Home from '../components/Home';
 import Search from '../components/Search';
 import Results from '../components/Results';
 import Login from '../components/Login';
@@ -30,8 +31,9 @@ export default (
 	<Router history={browserHistory}>
 		<Route path="/" component={Main} auth={auth}>
 			{/* Default route is for Search */}
-			<IndexRedirect to="/Search" />
+			<IndexRedirect to="/Home" />
 			{/* Routes */}
+			<Route path="Home" component={Home} />
 			<Route path="Search" component={Search} />
 			<Route path="Results" component={Results} />
 			<Route path="AddVehicle" component={AddVehicle} />
