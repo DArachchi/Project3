@@ -12,9 +12,7 @@ import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import FlatButton from 'material-ui/FlatButton';
 import { Jumbotron } from 'react-bootstrap';
-
-// Including the Link component from React Router to navigate within our application without full page reloads
-var Link = require("react-router").Link;
+import {Link} from 'react-router';
 
 const styles = {
 	center: {
@@ -32,7 +30,8 @@ const styles = {
 		position: 'fixed'
 	},
   title: {
-    cursor: 'pointer',
+		color: '#FFFFFF',
+    cursor: 'pointer'
   },
 }
 
@@ -84,9 +83,9 @@ class Main extends Component {
 			// Main container includes material-ui theme
 			<MuiThemeProvider muiTheme={muiTheme}>
 				<div className="main-container">
-					<AppBar title={<span style={styles.title}>Star Car Finder</span>} style={styles.navibar} onLeftIconButtonTouchTap={this.handleToggle} iconElementRight={<FlatButton label="About Us" />} />
+					<AppBar title={<Link to='/Search' style={styles.title}>Star Car Finder</Link>} style={styles.navibar} onLeftIconButtonTouchTap={this.handleToggle} iconElementRight={<Link to='/AboutUs'><FlatButton style={styles.title} label="About Us" /></Link>} />
 					<Drawer docked={false} width={300} open={this.state.drawerOpen} onRequestChange={(open) => this.setState({open})}>
-						<AppBar title="Star Car Finder" style={styles.navibar} iconElementLeft={<IconButton onTouchTap={this.handleClose}><NavigationClose /></IconButton>}> </AppBar>
+						<AppBar title={<Link to='/Search' style={styles.title} onTouchTap={this.handleClose}>Star Car Finder</Link>} style={styles.navibar} iconElementLeft={<IconButton onTouchTap={this.handleClose}><NavigationClose /></IconButton>}> </AppBar>
 						<MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Sign In</MenuItem>
 						<MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Register</MenuItem>
 						<Link to="/Results"><MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Show All Vehicles</MenuItem></Link>

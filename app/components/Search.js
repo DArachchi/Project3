@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import {amber700, indigo900, lightBlueA400} from 'material-ui/styles/colors';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import Paper from 'material-ui/Paper';
 import AutoComplete from 'material-ui/AutoComplete';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -65,7 +63,8 @@ class Search extends Component {
 				<div className="jumbotron" style={styles.jumbotron}>
 					<h1 className="text-center"><strong>Star Car Finder</strong></h1>
 					<h2 className="text-center">Search for a Vehicle for Your Next Film</h2>
-
+				</div>
+				<Paper zDepth={2}>
 					<SelectField
 					value={this.state.make}
 					onChange={this.handleChange}
@@ -74,8 +73,7 @@ class Search extends Component {
 					{this.state.makeMenuItems}
 					</SelectField>
 					<RaisedButton>Search by Vehicle Make</RaisedButton>
-
-				</div>
+				</Paper>
 			</div>
 		)
 	}
