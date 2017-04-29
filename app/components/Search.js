@@ -4,17 +4,16 @@ import AutoComplete from 'material-ui/AutoComplete';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
+import Divider from 'material-ui/Divider';
 import helpers from '../utils/helpers';
-
-
-const items = [];
-for (let i = 0; i < 100; i++ ) {
-  items.push(<MenuItem value={i} key={i} primaryText={`Item ${i}`} />);
-}
 
 const styles = {
 	button: {
-		margin: '50px'
+		color: '#FFFFFF',
+		float: 'right',
+		marginRight: '50px',
+		marginTop: '25px',
+		width: '30%'
 	},
 	center: {
 		textAlign: 'center'
@@ -25,6 +24,9 @@ const styles = {
 	panelTitle: {
 		color: '#FFFFFF',
 		fontSize: '20pt'
+	},
+	selectField: {
+		marginLeft: '50px'
 	}
 }
 
@@ -78,10 +80,11 @@ class Search extends Component {
 								value={this.state.make}
 								onChange={this.handleChange}
 								floatingLabelText="Vehicle Make"
+								style={styles.selectField}
 								>
 								{this.state.makeMenuItems}
 								</SelectField>
-								<RaisedButton>Search by Vehicle Make</RaisedButton>
+								<RaisedButton secondary={true} style={styles.button} >Search by Vehicle Make</RaisedButton>
 							</div>
 						</Paper>
 					</div>
