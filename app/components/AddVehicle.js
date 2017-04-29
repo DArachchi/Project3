@@ -10,6 +10,7 @@ import FlatButton from 'material-ui/FlatButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import helpers from '../utils/helpers';
+import {Link} from 'react-router';
 
 const styles = {
 	panelHeader: {
@@ -75,16 +76,8 @@ class AddVehicle extends Component {
 
 	render() {
 		const dialogActions = [
-			<FlatButton
-			label="Cancel"
-			primary={true}
-			onTouchTap={this.handleDialogClose}
-			/>,
-			<FlatButton
-			label="Confirm"
-			primary={true}
-			onTouchTap={this.handleConfirm}
-			/>,
+			<FlatButton label="Cancel" primary={true} onTouchTap={this.handleDialogClose} />,
+			<Link to="/Results"><FlatButton label="Confirm" primary={true} onTouchTap={this.handleConfirm} /></Link>,
 		];
 
 		return(

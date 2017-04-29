@@ -13,6 +13,7 @@ import Search from '../components/Search';
 import Results from '../components/Results';
 import Login from '../components/Login';
 import AddVehicle from '../components/AddVehicle';
+import AboutUs from '../components/AboutUs';
 
 const auth = new AuthService('c33DRAUAGSXioyFIhWwPt7mZuVGbwsXm', 'star-car-finder.auth0.com');
 
@@ -24,7 +25,7 @@ const requireAuth = (nextState, replace) => {
 }
 
 // Export the Routes
-module.exports = (
+export default (
 	// High level component is the Router component.
 	<Router history={browserHistory}>
 		<Route path="/" component={Main} auth={auth}>
@@ -35,6 +36,7 @@ module.exports = (
 			<Route path="Results" component={Results} />
 			<Route path="AddVehicle" component={AddVehicle} />
 			<Route path="Login" component={Login} />
+			<Route path="AboutUs" component={AboutUs} />
 		
 		</Route>
 	</Router>
