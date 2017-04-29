@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Paper from 'material-ui/Paper';
+import {List, ListItem} from 'material-ui/List';
 
 const styles = {
 	panelHeader: {
@@ -23,6 +24,13 @@ class AboutUs extends Component {
 	// Clearing and setting initial state
 	constructor(props) {
 		super(props);
+		this.state = {
+			techBoxOpen: false
+		}
+	}
+
+	openGithub() {
+		window.open('https://github.com/DArachchi/Star-Car-Finder', '_blank');
 	}
 
 	render() {
@@ -39,10 +47,18 @@ class AboutUs extends Component {
 								</h1>
 							</div>
 							<div className="panel-body">
-								<ul>
-									<li>Created by Dino Arachchi in 2017 using React.js</li>
-									<li>Number 2</li>
-								</ul>
+								<List>
+									<ListItem disabled={true} primaryText="2017 Dino Arachchi" leftIcon={<i className="fa fa-copyright" aria-hidden="true"></i>} />
+									<ListItem primaryText="Technology Stack" initiallyOpen={false} primaryTogglesNestedList={true} leftIcon={<i className="fa fa-cogs" aria-hidden="true"></i>}
+									nestedItems={[
+										<ListItem disabled={true} key={1} primaryText="FrontEnd: React.js"	leftIcon={<i className="fa fa-facebook-official" aria-hidden="true"></i>} />,
+										<ListItem disabled={true} key={2} primaryText="Routing: Express.js"	leftIcon={<i className="fa fa-arrows" aria-hidden="true"></i>} />,
+										<ListItem disabled={true} key={3} primaryText="Server: Node.js" leftIcon={<i className="fa fa-server" aria-hidden="true"></i>} />,
+										<ListItem disabled={true} key={4} primaryText="Database: MySQL" leftIcon={<i className="fa fa-database" aria-hidden="true"></i>} />
+									]}
+									/>
+									<ListItem onTouchTap={this.openGithub} primaryText="Github Repository Link" leftIcon={<i className="fa fa-github" aria-hidden="true"></i>} />
+								</List>
 							</div>
 						</Paper>
 					</div>
