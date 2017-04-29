@@ -77,7 +77,7 @@ class AddVehicle extends Component {
 	render() {
 		const dialogActions = [
 			<FlatButton label="Cancel" primary={true} onTouchTap={this.handleDialogClose} />,
-			<Link to="/Results"><FlatButton label="Confirm" primary={true} onTouchTap={this.handleConfirm} /></Link>,
+			<Link to="/Home"><FlatButton label="Confirm" primary={true} onTouchTap={this.handleConfirm} /></Link>,
 		];
 
 		return(
