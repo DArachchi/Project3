@@ -6,6 +6,7 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
 import helpers from '../utils/helpers';
+import {Link} from 'react-router';
 
 const styles = {
 	button: {
@@ -39,6 +40,7 @@ class Search extends Component {
 			makeMenuItems: [],
 			vehicles: ""
 		};
+		this.submitMake = this.submitMake.bind(this);
 	}
 
 	componentDidMount() {
@@ -60,6 +62,10 @@ class Search extends Component {
 
 	handleChange = (event, index, value) => {
 		this.setState({make: value});
+	}
+
+	submitMake() {
+		console.log(this.state.make)
 	}
 
 	render() {
@@ -84,7 +90,7 @@ class Search extends Component {
 								>
 								{this.state.makeMenuItems}
 								</SelectField>
-								<RaisedButton secondary={true} style={styles.button} >Search by Vehicle Make</RaisedButton>
+								<Link to='/Results'><RaisedButton secondary={true} style={styles.button} onTouchTap={this.submitMake}>Search by Vehicle Make</RaisedButton></Link>
 							</div>
 						</Paper>
 					</div>
