@@ -83,9 +83,9 @@ class Main extends Component {
 			// Main container includes material-ui theme
 			<MuiThemeProvider muiTheme={muiTheme}>
 				<div className="main-container">
-					<AppBar title={<Link to='/Search' style={styles.title}>Star Car Finder</Link>} style={styles.navibar} onLeftIconButtonTouchTap={this.handleToggle} iconElementRight={<Link to='/AboutUs'><FlatButton style={styles.title} label="About Us" /></Link>} />
+					<AppBar title={<Link to='/Home' style={styles.title}>Star Car Finder</Link>} style={styles.navibar} onLeftIconButtonTouchTap={this.handleToggle} iconElementRight={<Link to='/AboutUs'><FlatButton style={styles.title} label="About Us" /></Link>} />
 					<Drawer docked={false} width={300} open={this.state.drawerOpen} onRequestChange={(open) => this.setState({open})}>
-						<AppBar title={<Link to='/Search' style={styles.title} onTouchTap={this.handleClose}>Star Car Finder</Link>} style={styles.navibar} iconElementLeft={<IconButton onTouchTap={this.handleClose}><NavigationClose /></IconButton>}> </AppBar>
+						<AppBar title={<Link to='/Home' style={styles.title} onTouchTap={this.handleClose}>Star Car Finder</Link>} style={styles.navibar} iconElementLeft={<IconButton onTouchTap={this.handleClose}><NavigationClose /></IconButton>}> </AppBar>
 						<MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Sign In</MenuItem>
 						<MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Register</MenuItem>
 						<Link to="/Results"><MenuItem style={styles.drawerItem} onTouchTap={this.handleClose}>Show All Vehicles</MenuItem></Link>

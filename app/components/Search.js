@@ -19,9 +19,12 @@ const styles = {
 	center: {
 		textAlign: 'center'
 	},
-	jumbotron: {
-		backgroundColor: '#FFFFFF',
-		color: '#1A237E'
+	panelHeader: {
+		backgroundColor: '#1A237E'
+	},
+	panelTitle: {
+		color: '#FFFFFF',
+		fontSize: '20pt'
 	}
 }
 
@@ -59,21 +62,30 @@ class Search extends Component {
 
 	render() {
 		return(
-			<div>
-				<div className="jumbotron" style={styles.jumbotron}>
-					<h1 className="text-center"><strong>Star Car Finder</strong></h1>
-					<h2 className="text-center">Search for a Vehicle for Your Next Film</h2>
+			<div className="main-container">
+				<div className="row">
+					<div className="col-lg-12">
+						<Paper zDepth={2}>
+							<div className="panel-heading" style={styles.panelHeader}>
+								<h1 className="panel-title" style={styles.panelTitle}>
+									<strong>
+										<i className="fa fa-list"></i>Search for a Vehicle
+									</strong>
+								</h1>
+							</div>
+							<div className="panel-body">
+								<SelectField
+								value={this.state.make}
+								onChange={this.handleChange}
+								floatingLabelText="Vehicle Make"
+								>
+								{this.state.makeMenuItems}
+								</SelectField>
+								<RaisedButton>Search by Vehicle Make</RaisedButton>
+							</div>
+						</Paper>
+					</div>
 				</div>
-				<Paper zDepth={2}>
-					<SelectField
-					value={this.state.make}
-					onChange={this.handleChange}
-					floatingLabelText="Vehicle Make"
-					>
-					{this.state.makeMenuItems}
-					</SelectField>
-					<RaisedButton>Search by Vehicle Make</RaisedButton>
-				</Paper>
 			</div>
 		)
 	}
