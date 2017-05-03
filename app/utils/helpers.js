@@ -12,7 +12,7 @@ const helpers = {
 	},
 	//This will return all choices for models from our database
 	getModels(makeIndex) {
-		var queryUrl = "/api/models/" + makeIndex;	
+		let queryUrl = "/api/models/" + makeIndex;	
 		return axios.get(queryUrl)
 			.then(function(response) {
 			return response;
@@ -27,7 +27,7 @@ const helpers = {
 	},
 	// This will save new vehicles to our database
 	addVehicle(make, model, year, color) {
-		var newVehicle = {
+		let newVehicle = {
 			make: make,
 			model: model,
 			year: year,

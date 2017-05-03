@@ -39,7 +39,6 @@ class Results extends Component {
 	}
 
 	renderVehicles() {
-		console.log(this.state)
 		return this.state.vehicles.map(function(vehicle, index) {
 			return (
 				<TableRow key={index}>

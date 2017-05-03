@@ -80,7 +80,7 @@ class AddVehicle extends Component {
 	}
 
 	handleDialogClose = () => {
-		this.setState({dialogOpen: false});
+		this.setState({ dialogOpen: false });
 	}
 
 	handleConfirm = () => {
@@ -92,7 +92,6 @@ class AddVehicle extends Component {
 	}
 
 	handleMakeChange = (event, index, value) => {
-		console.log(value)
 		this.setState({ make: value });
 		this.setState({ modelSelectDisabled: false });
 		this.setState({ modelMenuItems: [] });
@@ -107,7 +106,6 @@ class AddVehicle extends Component {
 	}
 
 	handleModelChange = (event, index, value) => {
-		console.log(value)
 		this.setState({ model: value });
 		this.setState({ yearSelectDisabled: false });
 		if(this.state.color && this.state.year) {
