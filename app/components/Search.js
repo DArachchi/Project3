@@ -65,7 +65,7 @@ class Search extends Component {
 	}
 
 	submitMake() {
-		console.log(this.state.make)
+		console.log(this.state.make);
 	}
 
 	render() {
@@ -82,13 +82,9 @@ class Search extends Component {
 								</h1>
 							</div>
 							<div className="panel-body">
-								<SelectField
-								value={this.state.make}
-								onChange={this.handleChange}
-								floatingLabelText="Vehicle Make"
-								style={styles.selectField}
-								>
-								{this.state.makeMenuItems}
+								<SelectField value={this.state.make} onChange={this.handleChange}
+								floatingLabelText="Vehicle Make" style={styles.selectField}	>
+									{this.state.makeMenuItems}
 								</SelectField>
 								<Link to='/Results'><RaisedButton secondary={true} style={styles.button} onTouchTap={this.submitMake}>Search by Vehicle Make</RaisedButton></Link>
 							</div>

@@ -9,6 +9,8 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 import helpers from '../utils/helpers';
 import {Link} from 'react-router';
 
@@ -24,9 +26,25 @@ const styles = {
 		marginLeft: '20px',
 		marginTop: '20px'
 	},
+	selectField: {
+		marginLeft: '20px',
+	},
 	textField: {
 		marginLeft: '20px'
 	}
+}
+
+// Create options for year dropdown menu
+const yearMenuItems = [];
+for(let i=1900; i<2019;i++) {
+	yearMenuItems.push(<MenuItem value={i} key={i} primaryText={i} />);
+}
+
+// Create options for color dropdown menu
+const colorOptions = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "White", "Silver", "Gray", "Black", "Other"];
+const colorMenuItems =[];
+for(let i=0; i<colorOptions.length;i++) {
+	colorMenuItems.push(<MenuItem value={colorOptions[i]} key={i} primaryText={colorOptions[i]} />);				
 }
 
 class AddVehicle extends Component {
@@ -37,40 +55,77 @@ class AddVehicle extends Component {
 			model: '',
 			year: '',
 			color: '',
+			makeOptions: [],
+			makeMenuItems: [],
+			modelOptions: [],
+			modelMenuItems: [],
 			dialogOpen: false,
+			modelSelectDisabled: true,
+			yearSelectDisabled: true,
+			colorSelectDisabled: true,
 			submitButtonDisabled: true
 		};
-		this.handleChange = this.handleChange.bind(this);
+		this.handleMakeChange = this.handleMakeChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+
+	componentDidMount() {
+		// Get list of options for makes from database and create menu items for dropdown menu
+		helpers.getMakes().then(function(makeData) {
+			this.setState({ makeOptions: makeData.data });
+			for(let i=0; i<this.state.makeOptions.length;i++) {
+				this.state.makeMenuItems.push(<MenuItem value={this.state.makeOptions[i].title} key={i} primaryText={this.state.makeOptions[i].title} />);				
+			}
+		}.bind(this));
 	}
 
 	handleDialogClose = () => {
 		this.setState({dialogOpen: false});
-	};
-
-	handleChange(event) {
-		const value = event.target.value;
-		const name = event.target.name;
-
-		this.setState({
-			[name]: value
-		});
-		if(this.state.make && this.state.model && this.state.year && this.state.color) {
-			this.setState({submitButtonDisabled: false});
-		} else {
-			this.setState({submitButtonDisabled:true});
-		}
 	}
 
 	handleConfirm = () => {
-		helpers.addVehicle(this.state.make, this.state.model, this.state.year, this.state.color).then(function(vehicleData) {
+		helpers.addVehicle(this.state.make, this.state.model, this.state.year, this.state.color)
+		.then(function(vehicleData) {
 			console.log(vehicleData);
 		}.bind(this));
 		this.handleDialogClose();
 	}
 
+	handleMakeChange = (event, index, value) => {
+		console.log(value)
+		this.setState({ make: value });
+		this.setState({ modelSelectDisabled: false });
+		this.setState({ modelMenuItems: [] });
+		this.setState({ submitButtonDisabled: true });
+
+		helpers.getModels(index+1).then(function(modelData) {
+			this.setState({ modelOptions: modelData.data });
+			for(let i=0; i<this.state.modelOptions.length;i++) {
+				this.state.modelMenuItems.push(<MenuItem value={this.state.modelOptions[i].title} key={i} primaryText={this.state.modelOptions[i].title} />);				
+			}
+		}.bind(this));
+	}
+
+	handleModelChange = (event, index, value) => {
+		console.log(value)
+		this.setState({ model: value });
+		this.setState({ yearSelectDisabled: false });
+		if(this.state.color && this.state.year) {
+			this.setState({ submitButtonDisabled: false });
+		}
+	}
+
+	handleYearChange = (event, index, value) => {
+		this.setState({ year: value });
+		this.setState({ colorSelectDisabled: false });
+	}
+
+	handleColorChange = (event, index, value) => {
+		this.setState({ color: value });
+		this.setState({ submitButtonDisabled: false });
+	}
+
 	handleSubmit(event) {
-		event.preventDefault();
 		this.setState({dialogOpen: true});
 	}
 
@@ -100,10 +155,27 @@ class AddVehicle extends Component {
 								</h1>
 							</div>
 							<div className="panel-body">
-								<TextField style={styles.textField} name='make' value={this.state.make} onChange={this.handleChange} floatingLabelText="Enter Vehicle Make"/><br/>
-								<TextField style={styles.textField} name='model' value={this.state.model} onChange={this.handleChange} floatingLabelText="Enter Vehicle Model"/><br/>
-								<TextField style={styles.textField} name='year' value={this.state.year} onChange={this.handleChange} floatingLabelText="Enter Vehicle Year"/><br/>
-								<TextField style={styles.textField} name='color' value={this.state.color} onChange={this.handleChange} floatingLabelText="Enter Vehicle Color"/><br/>
+								{/* Dropdown menu for selecting Make*/}
+								<SelectField value={this.state.make} onChange={this.handleMakeChange} floatingLabelText="Select Vehicle Make" style={styles.selectField} >
+									{this.state.makeMenuItems}
+								</SelectField>
+								<br/>
+								{/* Dropdown menu for selecting Model*/}
+								<SelectField disabled={this.state.modelSelectDisabled} value={this.state.model} onChange={this.handleModelChange} floatingLabelText="Select Vehicle Model" style={styles.selectField} >
+									{this.state.modelMenuItems}
+								</SelectField>	
+								<br/>
+								{/* Dropdown menu for selecting Year */}
+								<SelectField disabled={this.state.yearSelectDisabled} value={this.state.year} onChange={this.handleYearChange} floatingLabelText="Select Vehicle Year" style={styles.selectField} >
+									{yearMenuItems}
+								</SelectField>	
+								<br/>
+
+								{/* Dropdown menu for selecting Color */}
+								<SelectField disabled={this.state.colorSelectDisabled} value={this.state.color} onChange={this.handleColorChange} floatingLabelText="Select Vehicle Color" style={styles.selectField} >
+									{colorMenuItems}
+								</SelectField>	
+								<br/>
 
 								<FloatingActionButton style={styles.submitButton} secondary={true} disabled={this.state.submitButtonDisabled} onTouchTap={this.handleSubmit}><ContentAdd /></FloatingActionButton>
 							</div>

@@ -22,7 +22,6 @@ const styles = {
 }
 
 class Results extends Component {
-	// Clearing and setting initial state
 	constructor(props) {
 		super(props);
 		this.state = {

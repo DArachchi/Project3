@@ -22,8 +22,8 @@ app.use(express.static("./public"));
 
 // GET Route to get all vehicles
 app.get("/api/vehicles", function(req, res) {
-	db.vehicle.findAll({}).then(function(dbVehicle) {
-		res.json(dbVehicle);
+	db.vehicle.findAll({}).then(function(response) {
+		res.json(response);
 	});
 });
 
@@ -33,8 +33,8 @@ app.get("/api/id/:vehicleid", function(req, res) {
 		where: {
 			id: req.params.vehicleid
 		}
-	}).then(function(dbVehicleInfo) {
-		res.json(dbVehicleInfo);
+	}).then(function(response) {
+		res.json(response);
 	});
 });
 
@@ -44,11 +44,29 @@ app.get("/api/make/:make", function(req, res) {
 		where: {
 			make: req.params.make
 		}
-	}).then(function(dbVehicleInfo) {
-		res.json(dbVehicleInfo);
-
+	}).then(function(response) {
+		res.json(response);
 	});
 });
+
+// Get Route to show all options for makes
+app.get("/api/makes", function(req,res) {
+	db.make.findAll({}).then(function(response) {
+		res.json(response);
+	})
+});
+
+// Get Route to show all options for models within a make
+app.get("/api/models/:makeId", function(req, res) {
+	db.model.findAll({
+		where: {
+			makeId: req.params.makeId
+		}
+	}).then(function(response) {
+		res.json(response);
+	});
+});
+
 
 // Route to add a new vehicle
 app.post("/api/vehicles", function(req, res) {
@@ -57,8 +75,8 @@ app.post("/api/vehicles", function(req, res) {
 		model: req.body.model,
 		year: req.body.year,
 		color: req.body.color
-	}).then(function(dbVehicleInfo) {
-		res.json(dbVehicleInfo);
+	}).then(function(response) {
+		res.json(response);
 	})
 });
 
