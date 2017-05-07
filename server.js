@@ -72,7 +72,9 @@ app.get("/api/models/:makeId", function(req, res) {
 app.post("/api/vehicles", function(req, res) {
 	db.vehicle.create({
 		make: req.body.make,
+		makeId: req.body.makeId,
 		model: req.body.model,
+		modelId: req.body.modelId,
 		year: req.body.year,
 		color: req.body.color
 	}).then(function(response) {

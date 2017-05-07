@@ -25,11 +25,21 @@ const helpers = {
 			return response;
 		});
 	},
+	// This will return all vehicles from a given database from our database
+	getByMake(makeIndex) {
+		let queryUrl = "/api/makes/" + makeIndex;
+		return axios.get(queryUrl)
+			.then(function(response) {
+				return response;	
+			});
+	},
 	// This will save new vehicles to our database
-	addVehicle(make, model, year, color) {
+	addVehicle(make, makeId, model, modelId, year, color) {
 		let newVehicle = {
 			make: make,
+			makeId: makeId,
 			model: model,
+			modelId: modelId,
 			year: year,
 			color: color
 		};

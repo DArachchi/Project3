@@ -52,7 +52,9 @@ class AddVehicle extends Component {
 		super(props);
 		this.state = {
 			make: '',
+			makeId: '',
 			model: '',
+			modelId: '',
 			year: '',
 			color: '',
 			makeOptions: [],
@@ -84,7 +86,7 @@ class AddVehicle extends Component {
 	}
 
 	handleConfirm = () => {
-		helpers.addVehicle(this.state.make, this.state.model, this.state.year, this.state.color)
+		helpers.addVehicle(this.state.make, this.state.makeId, this.state.model, this.state.modelId, this.state.year, this.state.color)
 		.then(function(vehicleData) {
 			console.log(vehicleData);
 		}.bind(this));
@@ -93,6 +95,7 @@ class AddVehicle extends Component {
 
 	handleMakeChange = (event, index, value) => {
 		this.setState({ make: value });
+		this.setState({ makeId: index+1 });
 		this.setState({ modelSelectDisabled: false });
 		this.setState({ modelMenuItems: [] });
 		this.setState({ submitButtonDisabled: true });
@@ -107,6 +110,7 @@ class AddVehicle extends Component {
 
 	handleModelChange = (event, index, value) => {
 		this.setState({ model: value });
+		this.setState({ modelId: index });
 		this.setState({ yearSelectDisabled: false });
 		if(this.state.color && this.state.year) {
 			this.setState({ submitButtonDisabled: false });
