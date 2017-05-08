@@ -27,7 +27,7 @@ const helpers = {
 	},
 	// This will return all vehicles from a given database from our database
 	getByMake(makeIndex) {
-		let queryUrl = "/api/makes/" + makeIndex;
+		let queryUrl = "/api/make/" + makeIndex;
 		return axios.get(queryUrl)
 			.then(function(response) {
 				return response;	

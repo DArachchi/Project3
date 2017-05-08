@@ -38,11 +38,11 @@ app.get("/api/id/:vehicleid", function(req, res) {
 	});
 });
 
-// GET Route to show vehicles by make
-app.get("/api/make/:make", function(req, res) {
+// GET Route to show all vehicles with a specific make
+app.get("/api/make/:makeid", function(req, res) {
 	db.vehicle.findAll({
 		where: {
-			make: req.params.make
+			makeId: req.params.makeid
 		}
 	}).then(function(response) {
 		res.json(response);
