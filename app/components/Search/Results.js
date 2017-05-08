@@ -24,9 +24,6 @@ const styles = {
 class Results extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			vehicles: ""
-		};
 	}
 
 
