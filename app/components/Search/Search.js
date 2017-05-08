@@ -7,6 +7,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
 import helpers from '../../utils/helpers';
 import {Link} from 'react-router';
+import Query from './Query';
+import Results from './Results';
 
 const styles = {
 	button: {
@@ -35,14 +37,31 @@ class Search extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			results: {},
 			searchCriteria: {}
 		};
+		this.setQuery = this.setQuery.bind(this);
+	}
+
+	componentDidMount() {
+		helpers.getVehicles().then(function(vehicleData) {
+			this.setState({ results: { data: vehicleData.data } });
+			console.log(this.state.results);
+		}.bind(this));		
+	}
+
+	setQuery(makeIndex) {
+		helpers.getByMake(makeIndex).then(function(vehicleData) {
+			this.setState({ results: { data: vehicleData.data } });
+			console.log(this.state.results);
+		}.bind(this));
 	}
 
 	render() {
 		return(
 			<div className="main-container">
-				{this.props.children}
+				<Query updateSearch={this.setQuery} />
+				<Results results={this.state.results} />
 			</div>
 		)
 	}

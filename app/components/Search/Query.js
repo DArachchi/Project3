@@ -37,6 +37,7 @@ class Query extends Component {
 		super(props);
 		this.state = {
 			make: null,
+			makeId: null,
 			makes: [],
 			makeMenuItems: [],
 			vehicles: ""
@@ -45,28 +46,29 @@ class Query extends Component {
 	}
 
 	componentDidMount() {
-		helpers.getVehicles().then(function(vehicleData) {
+		helpers.getMakes().then(function(vehicleData) {
 			this.setState({ vehicles: vehicleData.data });
 			// Fill the 'makes' array with all the makes without duplicates and sort in alphabetical order
 			for(let i=0;i<this.state.vehicles.length;i++) {
-				if(this.state.makes.indexOf(this.state.vehicles[i].make) == -1) {
-					this.state.makes.push(this.state.vehicles[i].make);
-				}
-				this.state.makes.sort();
+				this.state.makes.push({
+						makeName: this.state.vehicles[i].title,
+				})
 			}
 			// Create menu items for each make
 			for(let i=0;i<this.state.makes.length;i++) {
-					this.state.makeMenuItems.push(<MenuItem value={this.state.makes[i]} key={i} primaryText={this.state.makes[i]} />);
+					this.state.makeMenuItems.push(<MenuItem value={this.state.makes[i].makeName} key={i} primaryText={this.state.makes[i].makeName} />);
 			}
 		}.bind(this));
 	}
 
 	handleChange = (event, index, value) => {
-		this.setState({make: value});
+		this.setState({ make: value });
+		this.setState({ makeId: index+1 });
 	}
 
 	submitMake() {
-		console.log(this.state.make);
+		console.log(this.state.makeId);
+		this.props.updateSearch(this.state.makeId);
 	}
 
 	render() {
@@ -87,7 +89,7 @@ class Query extends Component {
 								floatingLabelText="Vehicle Make" style={styles.selectField}	>
 									{this.state.makeMenuItems}
 								</SelectField>
-								<Link to='/Search/Results'><RaisedButton secondary={true} style={styles.button} onTouchTap={this.submitMake}>Search by Vehicle Make</RaisedButton></Link>
+								<RaisedButton secondary={true} style={styles.button} onTouchTap={this.submitMake}>Search by Vehicle Make</RaisedButton>
 							</div>
 						</Paper>
 					</div>

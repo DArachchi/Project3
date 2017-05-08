@@ -39,9 +39,11 @@ export default (
 			<Route path="Home" component={Home} />
 			{/* Route for Search component with sub-routes for query and results components */}
 			<Route path="Search" component={Search}>
+				{/*
 				<IndexRedirect to="Query" component={Query} />
 				<Route path="Query" component={Query} />
 				<Route path="Results" component={Results} />
+				*/}
 			</Route>
 			{/* Route to show all vehicles in database */}
 			<Route path="AllVehicles" component={AllVehicles} />
